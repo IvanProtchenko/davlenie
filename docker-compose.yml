@@ -1,0 +1,26 @@
+version: '3.7'
+services:
+    davlenie:
+        image: ivanprotchenko/davlenie:latest
+        volumes:
+            - /etc/localtime:/etc/localtime:ro
+            - /etc/timezone:/etc/timezone:ro
+        environment:
+            - TOKEN=
+            - URL_CLICK=
+            - DB=
+            - TABLE=
+        container_name: davlenie
+        restart: always
+        networks:
+            - davlenien
+
+networks:
+    davlenien:
+        driver: bridge
+        driver_opts:
+            com.docker.network.enable_ipv6: "false"
+        ipam:
+            driver: default
+            config:
+                - subnet: 172.30.0.0/24
